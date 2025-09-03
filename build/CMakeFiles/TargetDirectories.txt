@@ -1,0 +1,5 @@
+/home/arijit/Desktop/RIKEN internship/stim-syngen/build/CMakeFiles/stim_syngen.dir
+/home/arijit/Desktop/RIKEN internship/stim-syngen/build/CMakeFiles/measure.dir
+/home/arijit/Desktop/RIKEN internship/stim-syngen/build/CMakeFiles/mestest.dir
+/home/arijit/Desktop/RIKEN internship/stim-syngen/build/CMakeFiles/edit_cache.dir
+/home/arijit/Desktop/RIKEN internship/stim-syngen/build/CMakeFiles/rebuild_cache.dir

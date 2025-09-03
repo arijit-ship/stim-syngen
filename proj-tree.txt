@@ -1,0 +1,8 @@
+stim-syngen/
+├── include/             # Header files
+├── src/                 # Source files
+├── external/            # External libraries
+│   └── stim/            # Clone STIM here
+├── build/               # CMake build output
+├── docs/                # Documentation / notes
+
