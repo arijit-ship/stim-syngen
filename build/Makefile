@@ -118,19 +118,6 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named syngen
-
-# Build rule for target.
-syngen: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 syngen
-.PHONY : syngen
-
-# fast build rule for target.
-syngen/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/syngen.dir/build.make CMakeFiles/syngen.dir/build
-.PHONY : syngen/fast
-
-#=============================================================================
 # Target rules for targets named main_prog
 
 # Build rule for target.
@@ -168,6 +155,19 @@ mestest: cmake_check_build_system
 mestest/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mestest.dir/build.make CMakeFiles/mestest.dir/build
 .PHONY : mestest/fast
+
+#=============================================================================
+# Target rules for targets named syngen
+
+# Build rule for target.
+syngen: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 syngen
+.PHONY : syngen
+
+# fast build rule for target.
+syngen/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/syngen.dir/build.make CMakeFiles/syngen.dir/build
+.PHONY : syngen/fast
 
 #=============================================================================
 # Target rules for targets named Experimental
@@ -681,6 +681,30 @@ src/syngen.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/syngen.dir/build.make CMakeFiles/syngen.dir/src/syngen.cpp.s
 .PHONY : src/syngen.cpp.s
 
+src/syngen/SurfaceCodeSimulatorWrapper.o: src/syngen/SurfaceCodeSimulatorWrapper.cpp.o
+.PHONY : src/syngen/SurfaceCodeSimulatorWrapper.o
+
+# target to build an object file
+src/syngen/SurfaceCodeSimulatorWrapper.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/syngen.dir/build.make CMakeFiles/syngen.dir/src/syngen/SurfaceCodeSimulatorWrapper.cpp.o
+.PHONY : src/syngen/SurfaceCodeSimulatorWrapper.cpp.o
+
+src/syngen/SurfaceCodeSimulatorWrapper.i: src/syngen/SurfaceCodeSimulatorWrapper.cpp.i
+.PHONY : src/syngen/SurfaceCodeSimulatorWrapper.i
+
+# target to preprocess a source file
+src/syngen/SurfaceCodeSimulatorWrapper.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/syngen.dir/build.make CMakeFiles/syngen.dir/src/syngen/SurfaceCodeSimulatorWrapper.cpp.i
+.PHONY : src/syngen/SurfaceCodeSimulatorWrapper.cpp.i
+
+src/syngen/SurfaceCodeSimulatorWrapper.s: src/syngen/SurfaceCodeSimulatorWrapper.cpp.s
+.PHONY : src/syngen/SurfaceCodeSimulatorWrapper.s
+
+# target to generate assembly for a file
+src/syngen/SurfaceCodeSimulatorWrapper.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/syngen.dir/build.make CMakeFiles/syngen.dir/src/syngen/SurfaceCodeSimulatorWrapper.cpp.s
+.PHONY : src/syngen/SurfaceCodeSimulatorWrapper.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -737,6 +761,9 @@ help:
 	@echo "... src/syngen.o"
 	@echo "... src/syngen.i"
 	@echo "... src/syngen.s"
+	@echo "... src/syngen/SurfaceCodeSimulatorWrapper.o"
+	@echo "... src/syngen/SurfaceCodeSimulatorWrapper.i"
+	@echo "... src/syngen/SurfaceCodeSimulatorWrapper.s"
 .PHONY : help
 
 
