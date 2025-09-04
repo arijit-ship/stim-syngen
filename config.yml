@@ -16,15 +16,15 @@ parameters:
 exports:
   figure:
     exporting: True
-    trans_bg: False
+    trans_bg: True
     type:
-    file: "output/new_test_fig.svg"
+    file: "output/trans_new_test_fig.svg"
   circuit:
-    exporting: True
+    exporting: False
     file: "output/test_circ.txt"
   output:
     file: "output/output.json"
     prettify: True
   pdf_report:
-    exporting: True
+    exporting: False
     file: "examples/example_report.pdf"

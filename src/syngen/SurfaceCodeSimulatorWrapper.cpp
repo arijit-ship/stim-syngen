@@ -43,7 +43,8 @@ void SurfaceCodeSimulatorWrapper::generate_circuit() {
               << circuit.count_measurements() << " measurements.\n";
 }
 
-void SurfaceCodeSimulatorWrapper::draw_circuit_svg(const std::string &filename) {
+void SurfaceCodeSimulatorWrapper::draw_circuit_svg(const std::string &filename, bool transparent) {
+    // 1. Generate the SVG via STIM
     std::ofstream svg_file(filename);
     DiagramTimelineSvgDrawer::make_diagram_write_to(
         gen_circ.circuit,
@@ -55,7 +56,24 @@ void SurfaceCodeSimulatorWrapper::draw_circuit_svg(const std::string &filename) 
         0
     );
     svg_file.close();
+
+    // 2. If transparent == false, inject white background
+    if (!transparent) {
+        std::ifstream in(filename);
+        std::string svg((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());
+        in.close();
+
+        size_t insert_pos = svg.find('>'); // end of <svg ...> tag
+        if (insert_pos != std::string::npos) {
+            svg.insert(insert_pos + 1, "<rect width=\"100%\" height=\"100%\" fill=\"white\" />\n");
+        }
+
+        std::ofstream out(filename);
+        out << svg;
+        out.close();
+    }
 }
+
 
 void SurfaceCodeSimulatorWrapper::sample_measurements() {
     const Circuit &circuit = gen_circ.circuit;
@@ -89,3 +107,17 @@ void SurfaceCodeSimulatorWrapper::sample_measurements() {
         std::cout << std::endl;
     }
 }
+
+void SurfaceCodeSimulatorWrapper::export_circuit_txt(const std::string &filename) {
+    std::ofstream out(filename);
+    if (!out.is_open()) {
+        std::cerr << "Failed to open file for writing circuit: " << filename << std::endl;
+        return;
+    }
+
+    out << gen_circ.circuit << std::endl;
+    out.close();
+
+    std::cout << "Circuit exported to: " << filename << std::endl;
+}
+

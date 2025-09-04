@@ -17,8 +17,9 @@ public:
     );
 
     void generate_circuit();
-    void draw_circuit_svg(const std::string &filename);
+    void draw_circuit_svg(const std::string &filename, bool transparent = false);
     void sample_measurements();
+    void export_circuit_txt(const std::string &filename);
 
 private:
     size_t distance;
