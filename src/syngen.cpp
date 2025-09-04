@@ -12,6 +12,7 @@ int main(int argc, char **argv) {
     YAML::Node config;
     try {
         config = YAML::LoadFile(config_file);
+        cout<<"YAML config has been loaded successfully!\n"<<endl;
     } catch (const std::exception &e) {
         cerr << "Failed to load config file: " << e.what() << endl;
         return 1;
