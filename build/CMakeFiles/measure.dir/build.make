@@ -92,6 +92,7 @@ measure_EXTERNAL_OBJECTS =
 
 measure: CMakeFiles/measure.dir/src/measure.cpp.o
 measure: CMakeFiles/measure.dir/build.make
+measure: external/yaml-cpp/libyaml-cpp.a
 measure: CMakeFiles/measure.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="/home/arijit/Desktop/RIKEN internship/stim-syngen/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable measure"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/measure.dir/link.txt --verbose=$(VERBOSE)

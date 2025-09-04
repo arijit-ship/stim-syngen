@@ -92,6 +92,7 @@ mestest_EXTERNAL_OBJECTS =
 
 mestest: CMakeFiles/mestest.dir/src/mestest.cpp.o
 mestest: CMakeFiles/mestest.dir/build.make
+mestest: external/yaml-cpp/libyaml-cpp.a
 mestest: CMakeFiles/mestest.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="/home/arijit/Desktop/RIKEN internship/stim-syngen/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable mestest"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/mestest.dir/link.txt --verbose=$(VERBOSE)

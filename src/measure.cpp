@@ -4,6 +4,7 @@
 #include <random>
 
 int main() {
+    using namespace std;
     using namespace stim;
     using namespace stim_draw_internal;
 
@@ -47,6 +48,8 @@ int main() {
     simd_bits<MAX_BITWORD_WIDTH> ref_sample = TableauSimulator<MAX_BITWORD_WIDTH>::reference_sample_circuit(circuit);
     auto samples = sample_batch_measurements(circuit, ref_sample, shots, rng, false); // transposed=false
 
+    cout<<"SAMPLES: "<<samples<<endl;
+    cout<<"SAMPLES: "<<ref_sample<<endl;
     // --- 5. Print all bits with labels and newlines ---
     for (size_t shot = 0; shot < shots; shot++) {
         std::cout << "Shot " << shot << ":\n";
