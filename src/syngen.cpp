@@ -1,3 +1,7 @@
+/*
+The entrypoint of stim-syngen.
+*/
+
 #include <yaml-cpp/yaml.h>
 #include <iostream>
 #include <string>
