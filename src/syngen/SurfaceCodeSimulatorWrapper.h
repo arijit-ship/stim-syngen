@@ -1,10 +1,6 @@
 #pragma once
 #include "stim.h"
-#include <random>
-#include <vector>
 #include <string>
-#include <iostream>
-#include <fstream>
 
 class SurfaceCodeSimulatorWrapper {
 public:
@@ -13,12 +9,16 @@ public:
         size_t rounds,
         size_t shots,
         uint64_t seed,
-        const std::string &code_type = "rotated_memory_z"
+        const std::string &code_type,
+        double after_clifford_depolarization,
+        double before_round_data_depolarization,
+        double before_measure_flip_probability,
+        double after_reset_flip_probability
     );
 
-    void generate_circuit();         // Generate the circuit
-    void draw_circuit_svg(const std::string &filename); // Draw SVG
-    void sample_measurements();      // Sample measurements and print results
+    void generate_circuit();
+    void draw_circuit_svg(const std::string &filename);
+    void sample_measurements();
 
 private:
     size_t distance;
@@ -26,6 +26,11 @@ private:
     size_t shots;
     uint64_t seed;
     std::string code_type;
+
+    double after_clifford_depolarization;
+    double before_round_data_depolarization;
+    double before_measure_flip_probability;
+    double after_reset_flip_probability;
 
     stim::GeneratedCircuit gen_circ;
 };

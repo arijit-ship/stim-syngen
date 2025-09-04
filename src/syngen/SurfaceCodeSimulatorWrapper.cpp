@@ -1,6 +1,8 @@
 #include "SurfaceCodeSimulatorWrapper.h"
 #include "stim.h"
-
+#include <iostream>
+#include <fstream>
+#include <random>
 
 using namespace stim;
 using namespace stim_draw_internal;
@@ -10,21 +12,33 @@ SurfaceCodeSimulatorWrapper::SurfaceCodeSimulatorWrapper(
     size_t rounds,
     size_t shots,
     uint64_t seed,
-    const std::string &code_type
-) : distance(distance), rounds(rounds), shots(shots), seed(seed), code_type(code_type) {}
+    const std::string &code_type,
+    double after_clifford_depolarization,
+    double before_round_data_depolarization,
+    double before_measure_flip_probability,
+    double after_reset_flip_probability
+) : distance(distance),
+    rounds(rounds),
+    shots(shots),
+    seed(seed),
+    code_type(code_type),
+    after_clifford_depolarization(after_clifford_depolarization),
+    before_round_data_depolarization(before_round_data_depolarization),
+    before_measure_flip_probability(before_measure_flip_probability),
+    after_reset_flip_probability(after_reset_flip_probability) {}
 
 void SurfaceCodeSimulatorWrapper::generate_circuit() {
     CircuitGenParameters params(rounds, distance, code_type);
-    params.after_clifford_depolarization = 0;
-    params.before_round_data_depolarization = 0;
-    params.before_measure_flip_probability = 0;
-    params.after_reset_flip_probability = 0;
+    params.after_clifford_depolarization = after_clifford_depolarization;
+    params.before_round_data_depolarization = before_round_data_depolarization;
+    params.before_measure_flip_probability = before_measure_flip_probability;
+    params.after_reset_flip_probability = after_reset_flip_probability;
     params.validate_params();
 
     gen_circ = generate_surface_code_circuit(params);
 
     const Circuit &circuit = gen_circ.circuit;
-    std::cout << "Circuit has " 
+    std::cout << "Circuit has "
               << circuit.count_qubits() << " qubits and "
               << circuit.count_measurements() << " measurements.\n";
 }

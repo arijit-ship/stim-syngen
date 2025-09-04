@@ -17,15 +17,50 @@ int main(int argc, char **argv) {
         return 1;
     }
 
-    size_t distance = config["distance"] ? config["distance"].as<size_t>() : 3;
-    size_t rounds = config["rounds"] ? config["rounds"].as<size_t>() : 1;
-    size_t shots = config["shots"] ? config["shots"].as<size_t>() : 1;
-    uint64_t seed = config["seed"] ? config["seed"].as<uint64_t>() : 42;
-    string code_type = config["code_type"] ? config["code_type"].as<string>() : "rotated_memory_z";
+    // Task string
+    string task = config["task"].as<string>();
 
-    SurfaceCodeSimulatorWrapper sim(distance, rounds, shots, seed, code_type);
+    // --- Parameters ---
+    YAML::Node params = config["parameters"];
+    size_t distance = params["distance"].as<size_t>();
+    size_t rounds   = params["rounds"].as<size_t>();
+
+    // Errors
+    YAML::Node errors = params["errors"];
+    double after_clifford_depolarization      = errors["after_clifford_depolarization"].as<double>();
+    double before_round_data_depolarization   = errors["before_round_data_depolarization"].as<double>();
+    double before_measure_flip_probability    = errors["before_measure_flip_probability"].as<double>();
+    double after_reset_flip_probability       = errors["after_reset_flip_probability"].as<double>();
+
+    // Sampling
+    YAML::Node sampling = params["sampling"];
+    uint64_t seed = sampling["seed"].IsNull() ? 42 : sampling["seed"].as<uint64_t>(); // fallback seed if null
+    size_t shots  = sampling["shots"].as<size_t>();
+    bool console_log = sampling["console_log"].as<bool>();
+
+    // --- Simulator ---
+    SurfaceCodeSimulatorWrapper sim(
+        distance,
+        rounds,
+        shots,
+        seed,
+        task, // task string passed as code_type
+        after_clifford_depolarization,
+        before_round_data_depolarization,
+        before_measure_flip_probability,
+        after_reset_flip_probability
+    );
+
     sim.generate_circuit();
-    sim.draw_circuit_svg("MEASURE_circuit.svg");
+
+    // Exports
+    YAML::Node exports = config["exports"];
+
+    if (exports["figure"]["exporting"].as<bool>()) {
+        string fig_file = exports["figure"]["file"].as<string>();
+        sim.draw_circuit_svg(fig_file);
+    }
+
     sim.sample_measurements();
 
     return 0;
