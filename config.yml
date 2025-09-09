@@ -1,7 +1,7 @@
 task: "rotated_memory_z"
 parameters:
   distance: 3
-  rounds: 4
+  rounds: 2
   errors:
     after_clifford_depolarization: 0.0
     before_round_data_depolarization: 0.0
